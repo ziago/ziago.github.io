@@ -8,6 +8,7 @@ const state = {
 };
 
 const AUTH_KEY = "prezzario-auth-v1";
+const APP_VERSION = "20260616-1810";
 const elsAuth = {
   lockScreen: document.querySelector("#lockScreen"),
   appShell: document.querySelector("#appShell"),
@@ -136,11 +137,14 @@ function renderCards() {
 }
 
 function bytesFromBase64(value) {
-  return Uint8Array.from(atob(value), (char) => char.charCodeAt(0));
+  return Uint8Array.from(atob(String(value).replace(/\s/g, "")), (char) => char.charCodeAt(0));
 }
 
 async function decryptPrices(password) {
-  const response = await fetch("encrypted-data.json", { cache: "no-store" });
+  const response = await fetch(`encrypted-data.json?v=${APP_VERSION}`, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error("Listino non trovato. Ricarica la pagina.");
+  }
   const payload = await response.json();
   const baseKey = await crypto.subtle.importKey(
     "raw",
@@ -179,7 +183,7 @@ async function unlock(password) {
     startApp();
   } catch {
     sessionStorage.removeItem(AUTH_KEY);
-    elsAuth.authError.textContent = "Password non corretta.";
+    elsAuth.authError.textContent = "Password non corretta o pagina da aggiornare.";
     elsAuth.passwordInput.select();
   }
 }
