@@ -28,6 +28,7 @@ const els = {
   inkCost: document.querySelector("#inkCost"),
   ownCost: document.querySelector("#ownCost"),
   quoteNote: document.querySelector("#quoteNote"),
+  markupMultiplier: document.querySelector("#markupMultiplier"),
   searchInput: document.querySelector("#searchInput"),
   categoryTabs: document.querySelector("#categoryTabs"),
   cards: document.querySelector("#cards"),
@@ -100,6 +101,7 @@ function renderQuote() {
   els.paperCost.textContent = formatMoney(option.paperCost);
   els.inkCost.textContent = formatMoney(option.inkCost);
   els.ownCost.textContent = formatMoney(option.cost * quantity);
+  els.markupMultiplier.textContent = `x${String(state.data.meta.multiplier).replace(".", ",")}`;
   els.quoteNote.textContent = option.note || "";
   els.quoteNote.classList.toggle("visible", Boolean(option.note));
 }
