@@ -193,10 +193,11 @@ function estimateSummary() {
   const gross = state.estimate.reduce((sum, line) => sum + line.total, 0);
   const ownCost = state.estimate.reduce((sum, line) => sum + line.unitCost * line.quantity, 0);
   const iva = Number(state.data?.meta?.iva ?? 0.22);
+  const taxRate = Number(state.data?.meta?.estimatedTaxRate ?? 0);
   const net = gross / (1 + iva);
-  const vat = gross - net;
-  const profit = net - ownCost;
-  return { gross, ownCost, net, vat, profit };
+  const taxes = gross * taxRate;
+  const profit = net - ownCost - taxes;
+  return { gross, ownCost, net, vat: taxes, profit };
 }
 
 function renderEstimate() {
