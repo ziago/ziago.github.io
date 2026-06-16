@@ -8,8 +8,8 @@
     <meta name="apple-mobile-web-app-title" content="Prezzario">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Prezzario Stampe Giulio</title>
-    <link rel="manifest" href="manifest.webmanifest?v=20260616-quote">
-    <link rel="stylesheet" href="styles.css?v=20260616-quote">
+    <link rel="manifest" href="manifest.webmanifest?v=20260616-estimate">
+    <link rel="stylesheet" href="styles.css?v=20260616-estimate">
   </head>
   <body>
     <section class="lock-screen" id="lockScreen">
@@ -100,6 +100,21 @@
           <span>Totale da comunicare</span>
           <strong id="estimateTotal">€ 0,00</strong>
         </div>
+        <div class="estimate-actions">
+          <button class="primary-button" id="clientImageButton" type="button">Immagine cliente</button>
+          <button class="text-button" id="toggleMarginButton" type="button">Margini</button>
+        </div>
+        <div class="margin-panel hidden" id="marginPanel">
+          <div><span>Incasso cliente</span><strong id="marginGross">€ 0,00</strong></div>
+          <div><span>Imponibile stimato</span><strong id="marginNet">€ 0,00</strong></div>
+          <div><span>IVA 22%</span><strong id="marginVat">€ 0,00</strong></div>
+          <div><span>Costi tuoi</span><strong id="marginCost">€ 0,00</strong></div>
+          <div><span>Ricavo dopo costi</span><strong id="marginProfit">€ 0,00</strong></div>
+        </div>
+        <div class="client-image hidden" id="clientImageBox">
+          <img id="clientImagePreview" alt="Immagine preventivo cliente">
+          <a id="clientImageDownload" download="preventivo-stampe.png">Scarica immagine</a>
+        </div>
       </section>
 
       <section class="list-tools">
@@ -127,6 +142,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=20260616-quote"></script>
+    <script src="app.js?v=20260616-estimate"></script>
   </body>
 </html>

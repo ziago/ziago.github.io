@@ -10,7 +10,7 @@ const state = {
 
 const AUTH_KEY = "prezzario-auth-v1";
 const ESTIMATE_KEY = "prezzario-estimate-v1";
-const APP_VERSION = "20260616-quote";
+const APP_VERSION = "20260616-estimate";
 const elsAuth = {
   lockScreen: document.querySelector("#lockScreen"),
   appShell: document.querySelector("#appShell"),
@@ -34,9 +34,20 @@ const els = {
   markupMultiplier: document.querySelector("#markupMultiplier"),
   addLineButton: document.querySelector("#addLineButton"),
   clearEstimateButton: document.querySelector("#clearEstimateButton"),
+  clientImageButton: document.querySelector("#clientImageButton"),
+  toggleMarginButton: document.querySelector("#toggleMarginButton"),
   estimateEmpty: document.querySelector("#estimateEmpty"),
   estimateLines: document.querySelector("#estimateLines"),
   estimateTotal: document.querySelector("#estimateTotal"),
+  marginPanel: document.querySelector("#marginPanel"),
+  marginGross: document.querySelector("#marginGross"),
+  marginNet: document.querySelector("#marginNet"),
+  marginVat: document.querySelector("#marginVat"),
+  marginCost: document.querySelector("#marginCost"),
+  marginProfit: document.querySelector("#marginProfit"),
+  clientImageBox: document.querySelector("#clientImageBox"),
+  clientImagePreview: document.querySelector("#clientImagePreview"),
+  clientImageDownload: document.querySelector("#clientImageDownload"),
   searchInput: document.querySelector("#searchInput"),
   categoryTabs: document.querySelector("#categoryTabs"),
   cards: document.querySelector("#cards"),
@@ -178,12 +189,20 @@ function clearEstimate() {
   renderEstimate();
 }
 
+function estimateSummary() {
+  const gross = state.estimate.reduce((sum, line) => sum + line.total, 0);
+  const ownCost = state.estimate.reduce((sum, line) => sum + line.unitCost * line.quantity, 0);
+  const iva = Number(state.data?.meta?.iva ?? 0.22);
+  const net = gross / (1 + iva);
+  const vat = gross - net;
+  const profit = net - ownCost;
+  return { gross, ownCost, net, vat, profit };
+}
+
 function renderEstimate() {
   els.estimateEmpty.classList.toggle("hidden", state.estimate.length > 0);
   els.estimateLines.innerHTML = "";
-  let total = 0;
   state.estimate.forEach((line) => {
-    total += line.total;
     const row = document.createElement("article");
     row.className = "estimate-line";
     row.innerHTML = `
@@ -199,7 +218,113 @@ function renderEstimate() {
     `;
     els.estimateLines.append(row);
   });
-  els.estimateTotal.textContent = formatMoney(total);
+  const summary = estimateSummary();
+  els.estimateTotal.textContent = formatMoney(summary.gross);
+  els.marginGross.textContent = formatMoney(summary.gross);
+  els.marginNet.textContent = formatMoney(summary.net);
+  els.marginVat.textContent = formatMoney(summary.vat);
+  els.marginCost.textContent = formatMoney(summary.ownCost);
+  els.marginProfit.textContent = formatMoney(summary.profit);
+  els.clientImageButton.disabled = state.estimate.length === 0;
+}
+
+function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = String(text).split(/\s+/);
+  let line = "";
+  let currentY = y;
+  words.forEach((word) => {
+    const test = line ? `${line} ${word}` : word;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, currentY);
+      line = word;
+      currentY += lineHeight;
+    } else {
+      line = test;
+    }
+  });
+  if (line) ctx.fillText(line, x, currentY);
+  return currentY + lineHeight;
+}
+
+async function createClientImage() {
+  if (!state.estimate.length) return;
+  const summary = estimateSummary();
+  const scale = 2;
+  const width = 1080;
+  const padding = 72;
+  const rowHeight = 118;
+  const height = 300 + state.estimate.length * rowHeight + 190;
+  const canvas = document.createElement("canvas");
+  canvas.width = width * scale;
+  canvas.height = height * scale;
+  const ctx = canvas.getContext("2d");
+  ctx.scale(scale, scale);
+
+  ctx.fillStyle = "#fffdf8";
+  ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = "#172026";
+  ctx.font = "900 54px system-ui, -apple-system, sans-serif";
+  ctx.fillText("Preventivo Stampe", padding, 95);
+  ctx.font = "700 25px system-ui, -apple-system, sans-serif";
+  ctx.fillStyle = "#65707a";
+  ctx.fillText(new Date().toLocaleDateString("it-IT"), padding, 138);
+
+  let y = 205;
+  state.estimate.forEach((line) => {
+    ctx.fillStyle = "#ffffff";
+    ctx.strokeStyle = "#d8d0c4";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(padding, y - 52, width - padding * 2, 92, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = "#172026";
+    ctx.font = "900 30px system-ui, -apple-system, sans-serif";
+    ctx.fillText(`${line.quantity} x ${line.formatLabel}`, padding + 24, y - 14);
+    ctx.font = "700 23px system-ui, -apple-system, sans-serif";
+    ctx.fillStyle = "#65707a";
+    drawWrappedText(ctx, line.paperName, padding + 24, y + 18, 570, 27);
+    ctx.font = "900 32px system-ui, -apple-system, sans-serif";
+    ctx.fillStyle = "#172026";
+    ctx.textAlign = "right";
+    ctx.fillText(formatMoney(line.total), width - padding - 24, y + 6);
+    ctx.font = "700 21px system-ui, -apple-system, sans-serif";
+    ctx.fillStyle = "#65707a";
+    ctx.fillText(`${formatMoney(line.unitPrice)} cad.`, width - padding - 24, y + 34);
+    ctx.textAlign = "left";
+    y += rowHeight;
+  });
+
+  y += 20;
+  ctx.fillStyle = "#0b4f49";
+  ctx.beginPath();
+  ctx.roundRect(padding, y, width - padding * 2, 124, 14);
+  ctx.fill();
+  ctx.fillStyle = "rgba(255,255,255,0.78)";
+  ctx.font = "800 27px system-ui, -apple-system, sans-serif";
+  ctx.fillText("Totale preventivo", padding + 30, y + 48);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 58px system-ui, -apple-system, sans-serif";
+  ctx.textAlign = "right";
+  ctx.fillText(formatMoney(summary.gross), width - padding - 30, y + 78);
+  ctx.textAlign = "left";
+
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png", 0.95));
+  if (!blob) return;
+  const url = URL.createObjectURL(blob);
+  els.clientImagePreview.src = url;
+  els.clientImageDownload.href = url;
+  els.clientImageBox.classList.remove("hidden");
+
+  if (navigator.canShare && navigator.canShare({ files: [new File([blob], "preventivo-stampe.png", { type: "image/png" })] })) {
+    const file = new File([blob], "preventivo-stampe.png", { type: "image/png" });
+    try {
+      await navigator.share({ files: [file], title: "Preventivo Stampe" });
+    } catch {
+      // The preview and download link stay visible if sharing is cancelled.
+    }
+  }
 }
 
 function renderCards() {
@@ -301,6 +426,10 @@ function startApp() {
   });
   els.addLineButton.addEventListener("click", addLineToEstimate);
   els.clearEstimateButton.addEventListener("click", clearEstimate);
+  els.toggleMarginButton.addEventListener("click", () => {
+    els.marginPanel.classList.toggle("hidden");
+  });
+  els.clientImageButton.addEventListener("click", createClientImage);
   els.estimateLines.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-remove-line]");
     if (button) removeEstimateLine(button.dataset.removeLine);

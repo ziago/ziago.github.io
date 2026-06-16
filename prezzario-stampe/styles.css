@@ -327,6 +327,16 @@ input:focus {
   font-weight: 850;
 }
 
+.text-button,
+.primary-button {
+  cursor: pointer;
+}
+
+.primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .estimate-empty {
   margin-top: 14px;
   border: 1px dashed var(--line);
@@ -420,6 +430,73 @@ input:focus {
   flex: 0 0 auto;
   font-size: 1.7rem;
   line-height: 1;
+}
+
+.estimate-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.estimate-actions .primary-button {
+  margin: 0;
+}
+
+.margin-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.margin-panel.hidden,
+.client-image.hidden {
+  display: none;
+}
+
+.margin-panel div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.margin-panel div:last-child {
+  grid-column: 1 / -1;
+}
+
+.margin-panel span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.margin-panel strong {
+  display: block;
+  margin-top: 3px;
+  font-weight: 900;
+}
+
+.client-image {
+  display: grid;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.client-image img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.client-image a {
+  justify-self: start;
+  color: var(--accent-dark);
+  font-weight: 900;
+  text-decoration: none;
 }
 
 .list-tools {
