@@ -7,8 +7,17 @@ const state = {
   search: "",
 };
 
+const AUTH_KEY = "prezzario-auth-v1";
+const elsAuth = {
+  lockScreen: document.querySelector("#lockScreen"),
+  appShell: document.querySelector("#appShell"),
+  passwordForm: document.querySelector("#passwordForm"),
+  passwordInput: document.querySelector("#passwordInput"),
+  authError: document.querySelector("#authError"),
+  logoutButton: document.querySelector("#logoutButton"),
+};
+
 const els = {
-  paperCount: document.querySelector("#paperCount"),
   formatSelect: document.querySelector("#formatSelect"),
   paperSelect: document.querySelector("#paperSelect"),
   quantityInput: document.querySelector("#quantityInput"),
@@ -124,15 +133,57 @@ function renderCards() {
   });
 }
 
-async function init() {
-  if (window.PREZZARIO_DATA) {
-    state.data = window.PREZZARIO_DATA;
-  } else {
-    const response = await fetch("prices.json", { cache: "no-store" });
-    state.data = await response.json();
+function bytesFromBase64(value) {
+  return Uint8Array.from(atob(value), (char) => char.charCodeAt(0));
+}
+
+async function decryptPrices(password) {
+  const response = await fetch("encrypted-data.json", { cache: "no-store" });
+  const payload = await response.json();
+  const baseKey = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(password),
+    "PBKDF2",
+    false,
+    ["deriveKey"],
+  );
+  const key = await crypto.subtle.deriveKey(
+    {
+      name: "PBKDF2",
+      salt: bytesFromBase64(payload.salt),
+      iterations: payload.iterations,
+      hash: "SHA-256",
+    },
+    baseKey,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["decrypt"],
+  );
+  const plain = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv: bytesFromBase64(payload.iv) },
+    key,
+    bytesFromBase64(payload.ciphertext),
+  );
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+
+async function unlock(password) {
+  elsAuth.authError.textContent = "";
+  try {
+    state.data = await decryptPrices(password);
+    sessionStorage.setItem(AUTH_KEY, password);
+    elsAuth.lockScreen.classList.add("hidden");
+    elsAuth.appShell.classList.remove("locked");
+    startApp();
+  } catch {
+    sessionStorage.removeItem(AUTH_KEY);
+    elsAuth.authError.textContent = "Password non corretta.";
+    elsAuth.passwordInput.select();
   }
+}
+
+function startApp() {
   state.paperId = papersForFormat()[0]?.id || state.data.papers[0]?.id || "";
-  els.paperCount.textContent = `${state.data.papers.length} carte`;
 
   els.formatSelect.addEventListener("change", (event) => setFormat(event.target.value));
   els.quickFormats.addEventListener("click", (event) => {
@@ -164,6 +215,22 @@ async function init() {
   renderCards();
 }
 
-init().catch((error) => {
-  document.body.innerHTML = `<main class="app-shell"><h1>Errore dati</h1><p>${error.message}</p></main>`;
+async function initAuth() {
+  elsAuth.passwordForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    unlock(elsAuth.passwordInput.value);
+  });
+  elsAuth.logoutButton.addEventListener("click", () => {
+    sessionStorage.removeItem(AUTH_KEY);
+    window.location.reload();
+  });
+
+  const saved = sessionStorage.getItem(AUTH_KEY);
+  if (saved) {
+    await unlock(saved);
+  }
+}
+
+initAuth().catch((error) => {
+  elsAuth.authError.textContent = error.message;
 });

@@ -12,13 +12,26 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <main class="app-shell">
+    <section class="lock-screen" id="lockScreen">
+      <form class="lock-box" id="passwordForm">
+        <p class="eyebrow">Accesso riservato</p>
+        <h1>Prezzario Stampe</h1>
+        <label class="field">
+          <span>Password</span>
+          <input id="passwordInput" type="password" autocomplete="current-password" inputmode="text">
+        </label>
+        <button class="primary-button" type="submit">Entra</button>
+        <p class="auth-error" id="authError"></p>
+      </form>
+    </section>
+
+    <main class="app-shell locked" id="appShell">
       <header class="topbar">
         <div>
           <p class="eyebrow">Preventivo rapido</p>
           <h1>Prezzario Stampe</h1>
         </div>
-        <div class="status-pill" id="paperCount">-- carte</div>
+        <button class="status-pill exit-button" id="logoutButton" type="button">Esci</button>
       </header>
 
       <section class="quote-panel" aria-label="Calcolatore preventivo">
@@ -97,7 +110,6 @@
       </article>
     </template>
 
-    <script src="data.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

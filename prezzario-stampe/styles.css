@@ -36,6 +36,53 @@ select {
   padding: max(18px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
 }
 
+.locked {
+  display: none;
+}
+
+.lock-screen {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: max(18px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+}
+
+.lock-screen.hidden {
+  display: none;
+}
+
+.lock-box {
+  width: min(100%, 420px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.lock-box h1 {
+  margin-bottom: 22px;
+}
+
+.primary-button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 900;
+}
+
+.auth-error {
+  min-height: 20px;
+  margin: 10px 0 0;
+  color: #a23624;
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
 .topbar {
   display: flex;
   align-items: flex-start;
@@ -72,6 +119,10 @@ h1 {
   background: rgba(255, 253, 248, 0.75);
   font-size: 0.85rem;
   font-weight: 800;
+}
+
+.exit-button {
+  cursor: pointer;
 }
 
 .quote-panel,
