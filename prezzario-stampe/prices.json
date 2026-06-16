@@ -1,0 +1,907 @@
+{
+  "meta": {
+    "title": "Prezzario Stampe Giulio",
+    "currency": "EUR",
+    "iva": 0.22,
+    "multiplier": 2,
+    "inkPolicy": "Costo inchiostro Epson più alto (riga Matte OEM del file Excel)",
+    "updatedAt": "2026-06-16"
+  },
+  "formats": [
+    {
+      "id": "10x15",
+      "label": "10 x 15",
+      "mm": "100 x 150 mm"
+    },
+    {
+      "id": "13x18",
+      "label": "13 x 18",
+      "mm": "130 x 180 mm"
+    },
+    {
+      "id": "A5",
+      "label": "A5",
+      "mm": "148 x 210 mm"
+    },
+    {
+      "id": "A4",
+      "label": "A4",
+      "mm": "210 x 297 mm"
+    },
+    {
+      "id": "A3",
+      "label": "A3",
+      "mm": "297 x 420 mm"
+    },
+    {
+      "id": "A3+",
+      "label": "A3+",
+      "mm": "329 x 483 mm"
+    },
+    {
+      "id": "A2",
+      "label": "A2",
+      "mm": "420 x 594 mm"
+    },
+    {
+      "id": "A3+ Angoli Grezzi",
+      "label": "A3+ Angoli Grezzi",
+      "mm": "329 x 483 mm"
+    },
+    {
+      "id": "A2 Angoli Grezzi",
+      "label": "A2 Angoli Grezzi",
+      "mm": "420 x 594 mm"
+    },
+    {
+      "id": "Panorama",
+      "label": "Panorama 21 x 59,4",
+      "mm": "210 x 594 mm"
+    }
+  ],
+  "papers": [
+    {
+      "id": "epson-lucida-glossy",
+      "name": "Epson Carta Fotografica Lucida / Glossy",
+      "category": "PHOTO",
+      "options": [
+        {
+          "formatId": "10x15",
+          "paperCost": 0.1577,
+          "inkCost": 0.2184,
+          "cost": 0.3761,
+          "clientUnit": 0.7522,
+          "source": "Amazon Epson Carta Fotografica Lucida 10x15cm, 100 fogli",
+          "note": ""
+        },
+        {
+          "formatId": "13x18",
+          "paperCost": 0.5467,
+          "inkCost": 0.3185,
+          "cost": 0.8652,
+          "clientUnit": 1.7303,
+          "source": "Amazon Epson Super Carta Fotografica Lucida 13x18 cm, 30 fogli",
+          "note": ""
+        },
+        {
+          "formatId": "A5",
+          "paperCost": 0.669,
+          "inkCost": 0.3185,
+          "cost": 0.9875,
+          "clientUnit": 1.975,
+          "source": "Derivato da Epson A4: preventivo prudente su foglio A4 intero",
+          "note": "Calcolato con carta A4 intera, non mezzo foglio."
+        },
+        {
+          "formatId": "A4",
+          "paperCost": 0.669,
+          "inkCost": 0.728,
+          "cost": 1.397,
+          "clientUnit": 2.794,
+          "source": "Amazon Epson Carta Fotografica Glossy A4, 50 fogli",
+          "note": ""
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 1.5455,
+          "inkCost": 1.4014,
+          "cost": 2.9469,
+          "clientUnit": 5.8938,
+          "source": "Amazon Epson Carta Fotografica Glossy A3, 20 fogli",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-luster-gr260",
+      "name": "Hahnemuhle Photo Luster gr260",
+      "category": "PHOTO",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 0.815,
+          "inkCost": 0.728,
+          "cost": 1.543,
+          "clientUnit": 3.0859
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 1.6089,
+          "inkCost": 1.4014,
+          "cost": 3.0103,
+          "clientUnit": 6.0207
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 2.0633,
+          "inkCost": 2.2477,
+          "cost": 4.311,
+          "clientUnit": 8.6219
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 3.1544,
+          "inkCost": 3.4034,
+          "cost": 6.5578,
+          "clientUnit": 13.1157
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-glossy-gr260",
+      "name": "Hahnemuhle Photo Glossy gr260",
+      "category": "PHOTO",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 0.815,
+          "inkCost": 0.728,
+          "cost": 1.543,
+          "clientUnit": 3.0859
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 1.6089,
+          "inkCost": 1.4014,
+          "cost": 3.0103,
+          "clientUnit": 6.0207
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 2.0633,
+          "inkCost": 2.2477,
+          "cost": 4.311,
+          "clientUnit": 8.6219
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 3.1544,
+          "inkCost": 3.4034,
+          "cost": 6.5578,
+          "clientUnit": 13.1157
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-matt-fibre-gr200",
+      "name": "Hahnemuhle Matt Fibre gr200",
+      "category": "PHOTO",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 0.9721,
+          "inkCost": 0.728,
+          "cost": 1.7001,
+          "clientUnit": 3.4002
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 1.9105,
+          "inkCost": 1.4014,
+          "cost": 3.3119,
+          "clientUnit": 6.6238
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 2.4542,
+          "inkCost": 2.2477,
+          "cost": 4.7019,
+          "clientUnit": 9.4037
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 3.7703,
+          "inkCost": 3.4034,
+          "cost": 7.1737,
+          "clientUnit": 14.3474
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-pearl-gr310",
+      "name": "Hahnemuhle Photo Pearl gr310",
+      "category": "PHOTO",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 1.0106,
+          "inkCost": 0.728,
+          "cost": 1.7386,
+          "clientUnit": 3.4773
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 2.0252,
+          "inkCost": 1.4014,
+          "cost": 3.4266,
+          "clientUnit": 6.8532
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 2.5303,
+          "inkCost": 2.2477,
+          "cost": 4.778,
+          "clientUnit": 9.556
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 3.885,
+          "inkCost": 3.4034,
+          "cost": 7.2884,
+          "clientUnit": 14.5767
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-silk-baryta-gr310",
+      "name": "Hahnemuhle Silk Baryta gr310",
+      "category": "PHOTO",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 1.4152,
+          "inkCost": 0.728,
+          "cost": 2.1432,
+          "clientUnit": 4.2864
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 2.0252,
+          "inkCost": 1.4014,
+          "cost": 3.4266,
+          "clientUnit": 6.8532
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 2.5303,
+          "inkCost": 2.2477,
+          "cost": 4.778,
+          "clientUnit": 9.556
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 3.885,
+          "inkCost": 3.4034,
+          "cost": 7.2884,
+          "clientUnit": 14.5767
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-rag-bright-white-gr310",
+      "name": "Hahnemuhle Photo Rag Bright White gr310",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.2755,
+          "inkCost": 0.728,
+          "cost": 3.0035,
+          "clientUnit": 6.0071
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.5218,
+          "inkCost": 1.4014,
+          "cost": 5.9232,
+          "clientUnit": 11.8464
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 5.7594,
+          "inkCost": 2.2477,
+          "cost": 8.0071,
+          "clientUnit": 16.0142
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 8.8499,
+          "inkCost": 3.4034,
+          "cost": 12.2533,
+          "clientUnit": 24.5066
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-rag-gr308",
+      "name": "Hahnemuhle Photo Rag gr308",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.2755,
+          "inkCost": 0.728,
+          "cost": 3.0035,
+          "clientUnit": 6.0071
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.5218,
+          "inkCost": 1.4014,
+          "cost": 5.9232,
+          "clientUnit": 11.8464
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 5.7594,
+          "inkCost": 2.2477,
+          "cost": 8.0071,
+          "clientUnit": 16.0142
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 8.8499,
+          "inkCost": 3.4034,
+          "cost": 12.2533,
+          "clientUnit": 24.5066
+        },
+        {
+          "formatId": "A5",
+          "paperCost": 1.1533,
+          "inkCost": 0.3185,
+          "cost": 1.4718,
+          "clientUnit": 2.9436
+        },
+        {
+          "formatId": "10x15",
+          "paperCost": 0.5555,
+          "inkCost": 0.2184,
+          "cost": 0.7739,
+          "clientUnit": 1.5478
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-rag-ultra-smooth-gr305",
+      "name": "Hahnemuhle Photo Rag Ultra Smooth gr305",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.2755,
+          "inkCost": 0.728,
+          "cost": 3.0035,
+          "clientUnit": 6.0071
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.5218,
+          "inkCost": 1.4014,
+          "cost": 5.9232,
+          "clientUnit": 11.8464
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 5.7594,
+          "inkCost": 2.2477,
+          "cost": 8.0071,
+          "clientUnit": 16.0142
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 8.8499,
+          "inkCost": 3.4034,
+          "cost": 12.2533,
+          "clientUnit": 24.5066
+        },
+        {
+          "formatId": "10x15",
+          "paperCost": 0.5555,
+          "inkCost": 0.2184,
+          "cost": 0.7739,
+          "clientUnit": 1.5478
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-albrecht-durer-gr210",
+      "name": "Hahnemuhle Albrecht Durer gr210",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 1.5899,
+          "inkCost": 0.728,
+          "cost": 2.3179,
+          "clientUnit": 4.6358
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 3.1671,
+          "inkCost": 1.4014,
+          "cost": 4.5685,
+          "clientUnit": 9.137
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 4.0377,
+          "inkCost": 2.2477,
+          "cost": 6.2854,
+          "clientUnit": 12.5708
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 6.2113,
+          "inkCost": 3.4034,
+          "cost": 9.6147,
+          "clientUnit": 19.2293
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-torchon-gr285",
+      "name": "Hahnemuhle Torchon gr285",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 1.605,
+          "inkCost": 0.728,
+          "cost": 2.333,
+          "clientUnit": 4.6661
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 3.1905,
+          "inkCost": 1.4014,
+          "cost": 4.5919,
+          "clientUnit": 9.1839
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 4.0611,
+          "inkCost": 2.2477,
+          "cost": 6.3088,
+          "clientUnit": 12.6177
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 6.2645,
+          "inkCost": 3.4034,
+          "cost": 9.6679,
+          "clientUnit": 19.3357
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-william-turner-gr310",
+      "name": "Hahnemuhle William Turner gr310",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.2755,
+          "inkCost": 0.728,
+          "cost": 3.0035,
+          "clientUnit": 6.0071
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.5218,
+          "inkCost": 1.4014,
+          "cost": 5.9232,
+          "clientUnit": 11.8464
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 5.7594,
+          "inkCost": 2.2477,
+          "cost": 8.0071,
+          "clientUnit": 16.0142
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 8.8562,
+          "inkCost": 3.4034,
+          "cost": 12.2596,
+          "clientUnit": 24.5192
+        },
+        {
+          "formatId": "A3+ Angoli Grezzi",
+          "paperCost": 8.9304,
+          "inkCost": 2.2477,
+          "cost": 8.9304,
+          "clientUnit": 17.8608
+        },
+        {
+          "formatId": "A2 Angoli Grezzi",
+          "paperCost": 13.745,
+          "inkCost": 3.4034,
+          "cost": 13.745,
+          "clientUnit": 27.49
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-german-hetching-gr310",
+      "name": "Hahnemuhle German Hetching gr310",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 1.8598,
+          "inkCost": 0.728,
+          "cost": 2.5878,
+          "clientUnit": 5.1755
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 3.6829,
+          "inkCost": 1.4014,
+          "cost": 5.0843,
+          "clientUnit": 10.1687
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 4.7019,
+          "inkCost": 2.2477,
+          "cost": 6.9496,
+          "clientUnit": 13.8992
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 7.2283,
+          "inkCost": 3.4034,
+          "cost": 10.6317,
+          "clientUnit": 21.2633
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-museum-hetching-gr350",
+      "name": "Hahnemuhle Museum Hetching gr350",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.4561,
+          "inkCost": 0.728,
+          "cost": 3.1841,
+          "clientUnit": 6.3682
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.8678,
+          "inkCost": 1.4014,
+          "cost": 6.2692,
+          "clientUnit": 12.5384
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 6.1878,
+          "inkCost": 2.2477,
+          "cost": 8.4355,
+          "clientUnit": 16.8711
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 9.5355,
+          "inkCost": 3.4034,
+          "cost": 12.9389,
+          "clientUnit": 25.8778
+        },
+        {
+          "formatId": "10x15",
+          "paperCost": 0.6352,
+          "inkCost": 0.2184,
+          "cost": 0.8536,
+          "clientUnit": 1.7072
+        },
+        {
+          "formatId": "A3+ Angoli Grezzi",
+          "paperCost": 9.6165,
+          "inkCost": 2.2477,
+          "cost": 9.6165,
+          "clientUnit": 19.2331
+        },
+        {
+          "formatId": "A2 Angoli Grezzi",
+          "paperCost": 14.783,
+          "inkCost": 3.4034,
+          "cost": 14.783,
+          "clientUnit": 29.566
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-bamboo-gr290",
+      "name": "Hahnemuhle Bamboo gr290",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.1101,
+          "inkCost": 0.728,
+          "cost": 2.8381,
+          "clientUnit": 5.6762
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.1778,
+          "inkCost": 1.4014,
+          "cost": 5.5792,
+          "clientUnit": 11.1583
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 5.3114,
+          "inkCost": 2.2477,
+          "cost": 7.5591,
+          "clientUnit": 15.1182
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 8.1877,
+          "inkCost": 3.4034,
+          "cost": 11.5911,
+          "clientUnit": 23.1821
+        },
+        {
+          "formatId": "A5",
+          "paperCost": 1.0931,
+          "inkCost": 0.3185,
+          "cost": 1.4116,
+          "clientUnit": 2.8232
+        },
+        {
+          "formatId": "10x15",
+          "paperCost": 0.5201,
+          "inkCost": 0.2184,
+          "cost": 0.7385,
+          "clientUnit": 1.4771
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-rice-paper-gr100",
+      "name": "Hahnemuhle Rice Paper gr100",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 0.9511,
+          "inkCost": 0.728,
+          "cost": 1.6791,
+          "clientUnit": 3.3582
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-rag-satin-gr310",
+      "name": "Hahnemuhle Photo Rag Satin gr310",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.3883,
+          "inkCost": 0.728,
+          "cost": 3.1163,
+          "clientUnit": 6.2325
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.736,
+          "inkCost": 1.4014,
+          "cost": 6.1374,
+          "clientUnit": 12.2749
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 6.0268,
+          "inkCost": 2.2477,
+          "cost": 8.2745,
+          "clientUnit": 16.549
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 9.2808,
+          "inkCost": 3.4034,
+          "cost": 12.6842,
+          "clientUnit": 25.3684
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-rag-pearl-gr320",
+      "name": "Hahnemuhle Photo Rag Pearl gr320",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.522,
+          "inkCost": 0.728,
+          "cost": 3.25,
+          "clientUnit": 6.5
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.9888,
+          "inkCost": 1.4014,
+          "cost": 6.3902,
+          "clientUnit": 12.7804
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 6.3538,
+          "inkCost": 2.2477,
+          "cost": 8.6015,
+          "clientUnit": 17.2029
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 9.7649,
+          "inkCost": 3.4034,
+          "cost": 13.1683,
+          "clientUnit": 26.3366
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-photo-rag-baryta-gr315",
+      "name": "Hahnemuhle Photo Rag Baryta gr315",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.5981,
+          "inkCost": 0.728,
+          "cost": 3.3261,
+          "clientUnit": 6.6522
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 5.1391,
+          "inkCost": 1.4014,
+          "cost": 6.5405,
+          "clientUnit": 13.0811
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 6.5509,
+          "inkCost": 2.2477,
+          "cost": 8.7986,
+          "clientUnit": 17.5972
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 10.0557,
+          "inkCost": 3.4034,
+          "cost": 13.4591,
+          "clientUnit": 26.9183
+        },
+        {
+          "formatId": "A5",
+          "paperCost": 1.4258,
+          "inkCost": 0.3185,
+          "cost": 1.7443,
+          "clientUnit": 3.4885
+        },
+        {
+          "formatId": "10x15",
+          "paperCost": 0.6901,
+          "inkCost": 0.2184,
+          "cost": 0.9085,
+          "clientUnit": 1.817
+        },
+        {
+          "formatId": "Panorama",
+          "paperCost": 5.1796,
+          "inkCost": 3.4034,
+          "cost": 8.583,
+          "clientUnit": 17.1661
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-fineart-baryta-gr325",
+      "name": "Hahnemuhle Fineart Baryta gr325",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.4478,
+          "inkCost": 0.728,
+          "cost": 3.1758,
+          "clientUnit": 6.3516
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.8571,
+          "inkCost": 1.4014,
+          "cost": 6.2585,
+          "clientUnit": 12.5169
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 6.1708,
+          "inkCost": 2.2477,
+          "cost": 8.4185,
+          "clientUnit": 16.8369
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 9.4823,
+          "inkCost": 3.4034,
+          "cost": 12.8857,
+          "clientUnit": 25.7715
+        },
+        {
+          "formatId": "10x15",
+          "paperCost": 0.9764,
+          "inkCost": 0.2184,
+          "cost": 1.1948,
+          "clientUnit": 2.3896
+        }
+      ]
+    },
+    {
+      "id": "hahnemuhle-fineart-pearl-gr285",
+      "name": "Hahnemuhle Fineart Pearl gr285",
+      "category": "FINEART",
+      "options": [
+        {
+          "formatId": "A4",
+          "paperCost": 2.3629,
+          "inkCost": 0.728,
+          "cost": 3.0909,
+          "clientUnit": 6.1818
+        },
+        {
+          "formatId": "A3",
+          "paperCost": 4.6916,
+          "inkCost": 1.4014,
+          "cost": 6.093,
+          "clientUnit": 12.1861
+        },
+        {
+          "formatId": "A3+",
+          "paperCost": 5.9653,
+          "inkCost": 2.2477,
+          "cost": 8.213,
+          "clientUnit": 16.426
+        },
+        {
+          "formatId": "A2",
+          "paperCost": 9.1788,
+          "inkCost": 3.4034,
+          "cost": 12.5822,
+          "clientUnit": 25.1644
+        },
+        {
+          "formatId": "A5",
+          "paperCost": 1.2948,
+          "inkCost": 0.3185,
+          "cost": 1.6133,
+          "clientUnit": 3.2267
+        },
+        {
+          "formatId": "10x15",
+          "paperCost": 0.6157,
+          "inkCost": 0.2184,
+          "cost": 0.8341,
+          "clientUnit": 1.6682
+        }
+      ]
+    }
+  ]
+}
