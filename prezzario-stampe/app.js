@@ -10,7 +10,7 @@ const state = {
 
 const AUTH_KEY = "prezzario-auth-v1";
 const ESTIMATE_KEY = "prezzario-estimate-v1";
-const APP_VERSION = "20260616-estimate";
+const APP_VERSION = "20260616-inktec";
 const elsAuth = {
   lockScreen: document.querySelector("#lockScreen"),
   appShell: document.querySelector("#appShell"),
@@ -122,8 +122,8 @@ function renderQuote() {
   els.totalPrice.value = formatMoney(option.clientUnit * quantity);
   els.unitPrice.textContent = formatMoney(option.clientUnit);
   els.paperCost.textContent = formatMoney(option.paperCost);
-  els.inkCost.textContent = formatMoney(option.inkCost);
-  els.ownCost.textContent = formatMoney(option.cost * quantity);
+  els.inkCost.textContent = formatMoney(option.actualInkCost ?? option.inkCost);
+  els.ownCost.textContent = formatMoney((option.ownCost ?? option.cost) * quantity);
   els.markupMultiplier.textContent = `x${String(state.data.meta.multiplier).replace(".", ",")}`;
   els.quoteNote.textContent = option.note || "";
   els.quoteNote.classList.toggle("visible", Boolean(option.note));
@@ -143,7 +143,7 @@ function currentLine() {
     paperName: paper.name,
     quantity,
     unitPrice: option.clientUnit,
-    unitCost: option.cost,
+    unitCost: option.ownCost ?? option.cost,
     total: option.clientUnit * quantity,
   };
 }
