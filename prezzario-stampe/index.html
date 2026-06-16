@@ -8,8 +8,8 @@
     <meta name="apple-mobile-web-app-title" content="Prezzario">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Prezzario Stampe Giulio</title>
-    <link rel="manifest" href="manifest.webmanifest?v=20260616-1810">
-    <link rel="stylesheet" href="styles.css?v=20260616-1810">
+    <link rel="manifest" href="manifest.webmanifest?v=20260616-quote">
+    <link rel="stylesheet" href="styles.css?v=20260616-quote">
   </head>
   <body>
     <section class="lock-screen" id="lockScreen">
@@ -83,6 +83,23 @@
           </div>
         </div>
         <p class="quote-note" id="quoteNote"></p>
+        <button class="primary-button add-button" id="addLineButton" type="button">Aggiungi al preventivo</button>
+      </section>
+
+      <section class="estimate-panel" aria-label="Preventivo cliente">
+        <div class="estimate-head">
+          <div>
+            <p class="eyebrow">Preventivo cliente</p>
+            <h2>Totale lavori</h2>
+          </div>
+          <button class="text-button" id="clearEstimateButton" type="button">Svuota</button>
+        </div>
+        <div class="estimate-empty" id="estimateEmpty">Nessuna stampa aggiunta.</div>
+        <div class="estimate-lines" id="estimateLines"></div>
+        <div class="estimate-total">
+          <span>Totale da comunicare</span>
+          <strong id="estimateTotal">€ 0,00</strong>
+        </div>
       </section>
 
       <section class="list-tools">
@@ -110,6 +127,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=20260616-1810"></script>
+    <script src="app.js?v=20260616-quote"></script>
   </body>
 </html>

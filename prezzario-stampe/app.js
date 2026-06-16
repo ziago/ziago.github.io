@@ -5,10 +5,12 @@ const state = {
   quantity: 1,
   category: "ALL",
   search: "",
+  estimate: [],
 };
 
 const AUTH_KEY = "prezzario-auth-v1";
-const APP_VERSION = "20260616-1810";
+const ESTIMATE_KEY = "prezzario-estimate-v1";
+const APP_VERSION = "20260616-quote";
 const elsAuth = {
   lockScreen: document.querySelector("#lockScreen"),
   appShell: document.querySelector("#appShell"),
@@ -30,6 +32,11 @@ const els = {
   ownCost: document.querySelector("#ownCost"),
   quoteNote: document.querySelector("#quoteNote"),
   markupMultiplier: document.querySelector("#markupMultiplier"),
+  addLineButton: document.querySelector("#addLineButton"),
+  clearEstimateButton: document.querySelector("#clearEstimateButton"),
+  estimateEmpty: document.querySelector("#estimateEmpty"),
+  estimateLines: document.querySelector("#estimateLines"),
+  estimateTotal: document.querySelector("#estimateTotal"),
   searchInput: document.querySelector("#searchInput"),
   categoryTabs: document.querySelector("#categoryTabs"),
   cards: document.querySelector("#cards"),
@@ -57,6 +64,10 @@ function papersForFormat(formatId = state.formatId) {
 
 function activePaper() {
   return state.data.papers.find((paper) => paper.id === state.paperId) || papersForFormat()[0];
+}
+
+function formatMeta(formatId = state.formatId) {
+  return state.data.formats.find((format) => format.id === formatId) || { id: formatId, label: formatId, mm: "" };
 }
 
 function setFormat(formatId) {
@@ -105,6 +116,90 @@ function renderQuote() {
   els.markupMultiplier.textContent = `x${String(state.data.meta.multiplier).replace(".", ",")}`;
   els.quoteNote.textContent = option.note || "";
   els.quoteNote.classList.toggle("visible", Boolean(option.note));
+}
+
+function currentLine() {
+  const paper = activePaper();
+  const option = paper ? optionFor(paper) : null;
+  if (!paper || !option) return null;
+  const format = formatMeta(option.formatId);
+  const quantity = Math.max(1, Number(state.quantity) || 1);
+  return {
+    id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    formatId: option.formatId,
+    formatLabel: format.label,
+    paperId: paper.id,
+    paperName: paper.name,
+    quantity,
+    unitPrice: option.clientUnit,
+    unitCost: option.cost,
+    total: option.clientUnit * quantity,
+  };
+}
+
+function saveEstimate() {
+  localStorage.setItem(ESTIMATE_KEY, JSON.stringify(state.estimate));
+}
+
+function loadEstimate() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(ESTIMATE_KEY) || "[]");
+    state.estimate = Array.isArray(saved) ? saved : [];
+  } catch {
+    state.estimate = [];
+  }
+}
+
+function addLineToEstimate() {
+  const line = currentLine();
+  if (!line) return;
+  const existing = state.estimate.find(
+    (item) => item.formatId === line.formatId && item.paperId === line.paperId && item.unitPrice === line.unitPrice,
+  );
+  if (existing) {
+    existing.quantity += line.quantity;
+    existing.total = existing.unitPrice * existing.quantity;
+  } else {
+    state.estimate.push(line);
+  }
+  saveEstimate();
+  renderEstimate();
+}
+
+function removeEstimateLine(id) {
+  state.estimate = state.estimate.filter((line) => line.id !== id);
+  saveEstimate();
+  renderEstimate();
+}
+
+function clearEstimate() {
+  state.estimate = [];
+  saveEstimate();
+  renderEstimate();
+}
+
+function renderEstimate() {
+  els.estimateEmpty.classList.toggle("hidden", state.estimate.length > 0);
+  els.estimateLines.innerHTML = "";
+  let total = 0;
+  state.estimate.forEach((line) => {
+    total += line.total;
+    const row = document.createElement("article");
+    row.className = "estimate-line";
+    row.innerHTML = `
+      <div>
+        <strong>${line.quantity} x ${line.formatLabel}</strong>
+        <span>${line.paperName}</span>
+        <em>${formatMoney(line.unitPrice)} cad.</em>
+      </div>
+      <div class="line-actions">
+        <strong>${formatMoney(line.total)}</strong>
+        <button type="button" data-remove-line="${line.id}" aria-label="Rimuovi riga">&times;</button>
+      </div>
+    `;
+    els.estimateLines.append(row);
+  });
+  els.estimateTotal.textContent = formatMoney(total);
 }
 
 function renderCards() {
@@ -204,6 +299,12 @@ function startApp() {
     state.quantity = Math.max(1, Number(event.target.value) || 1);
     renderQuote();
   });
+  els.addLineButton.addEventListener("click", addLineToEstimate);
+  els.clearEstimateButton.addEventListener("click", clearEstimate);
+  els.estimateLines.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-remove-line]");
+    if (button) removeEstimateLine(button.dataset.removeLine);
+  });
   els.searchInput.addEventListener("input", (event) => {
     state.search = event.target.value;
     renderCards();
@@ -216,8 +317,10 @@ function startApp() {
     renderCards();
   });
 
+  loadEstimate();
   renderControls();
   renderQuote();
+  renderEstimate();
   renderCards();
 }
 
